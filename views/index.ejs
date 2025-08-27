@@ -21,14 +21,25 @@
     </tr>
   </thead>
   <tbody>
+    <% if (posts && posts.length > 0) { %>
       <% posts.forEach(post => { %>
       <tr>
         <td><%= post.author %></td>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
-        <td>Action</td>
+        <td>
+            <a class="btn btn-warning" href="/posts/<%= post._id %>/edit">Edit</a>
+            <form action="/posts/<%= post._id %>?_method=DELETE" method="POST" style="display: inline;">
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        </td>
     </tr>
     <% }) %>
+    <% } else { %>
+      <tr>
+        <td>Nothing to show.</td>
+      </tr>
+      <% } %>
   </tbody>
 </table>
 </div>
